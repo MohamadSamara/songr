@@ -2,9 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Albums</title>
+    <link rel="stylesheet" type="text/css" href="album.css">
 </head>
 <body>
 <h1>Albums List</h1>
+
 <ul>
     <li th:each="album : ${albums}">
         <h2 th:text="${album.title}"></h2>
@@ -12,7 +14,47 @@
         <p th:text="${album.songCount + ' songs '}"></p>
         <p th:text="${album.length + ' Sec '}"></p>
         <img th:src="${album.imageUrl}" th:alt="${album.title}"/>
+
+<!--        <form th:action="@{'/delete/' + ${album.id}}" method="post">-->
+<!--            <button type="submit">Delete</button>-->
+<!--        </form>-->
     </li>
 </ul>
+
+
+
+<form action="/add-new-album" method="post">
+    <fieldset>
+        <legend>Add New Album</legend>
+
+        <label for="title">Album title</label>
+        <input type="text" name="title" id="title" required>
+
+        <br>
+
+        <label for="artist">artist</label>
+        <input type="text" name="artist" id="artist" required>
+
+        <br>
+
+        <label for="songCount">Song Count</label>
+        <input type="text" name="songCount" id="songCount" required>
+
+        <br>
+
+        <label for="length">length</label>
+        <input type="text" name="length" id="length" required>
+
+        <br>
+
+        <label for="imageUrl">Image Url</label>
+        <input type="text" name="imageUrl" id="imageUrl" required>
+
+        <br>
+
+        <input type="submit" value="Add Album">
+    </fieldset>
+</form>
+
 </body>
 </html>
