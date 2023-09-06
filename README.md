@@ -27,6 +27,11 @@ Follow these steps to run the application:
 
 Open a web browser and navigate to `http://localhost:8080/[NAME_OF_THE_ROUTE]`.
 
+- Splash Page: The home page at http://localhost:8080/ welcomes you with a "Welcome To Home Page" message.
+- Hello World: Access http://localhost:8080/hello to see "hello" message.
+- Capitalize Text: Visit http://localhost:8080/capitalize/{text} to capitalize text and view it in uppercase.
+- View Albums: Visit http://localhost:8080/albums to view the list of albums / add a new album to your collection.
+
 ## Stopping the Application
 
 To stop the application, simply press `Ctrl + C` in the terminal where the application is running. Confirm the termination, and the server will shut down.
