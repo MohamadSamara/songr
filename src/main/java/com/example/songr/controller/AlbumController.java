@@ -36,23 +36,30 @@ public class AlbumController {
         return "albums.html";
     }
 
+@PostMapping("/add-new-album")
+public RedirectView addAlbum(String title, String artist, String songCountStr, String lengthStr, String imageUrl) {
 
-    @PostMapping("/add-new-album")
-    public RedirectView addAlbum(String title, String artist, String songCountStr, String lengthStr, String imageUrl){
-
-        int songCount ;
-        int length;
-        try {
-            songCount = Integer.parseInt(songCountStr);
-            length = Integer.parseInt(lengthStr);
-        } catch (NumberFormatException e) {
-            return new RedirectView("/errorHandle");
-        }
-
-        Album newAlbum = new Album(title , artist , songCount , length , imageUrl);
-        albumRepository.save(newAlbum);
-        return new RedirectView("/albums");
+    if (!isNumeric(songCountStr) || !isNumeric(lengthStr)) {
+        return new RedirectView("/errorHandle");
     }
+
+    int songCount = Integer.parseInt(songCountStr);
+    int length = Integer.parseInt(lengthStr);
+
+    Album newAlbum = new Album(title, artist, songCount, length, imageUrl);
+    albumRepository.save(newAlbum);
+    return new RedirectView("/albums");
+}
+
+    private boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
 
 //    @DeleteMapping("/delete/{albumId}")
 //    public RedirectView deleteAlbum(@PathVariable Long albumId){
