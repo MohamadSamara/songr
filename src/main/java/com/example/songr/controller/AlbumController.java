@@ -61,6 +61,8 @@ public RedirectView addAlbum(String title, String artist, String songCountStr, S
     }
 
 
+
+
 //    @DeleteMapping("/delete/{albumId}")
 //    public RedirectView deleteAlbum(@PathVariable Long albumId){
 //        albumRepository.deleteById(albumId);
@@ -69,7 +71,7 @@ public RedirectView addAlbum(String title, String artist, String songCountStr, S
 
     @GetMapping("/errorHandle")
     public String error(Model model){
-        return "errorInavlidInput.html";
+        return "errorInvalidInput.html";
     }
 
 

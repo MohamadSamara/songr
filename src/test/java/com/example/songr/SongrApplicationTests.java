@@ -2,10 +2,19 @@ package com.example.songr;
 
 import com.example.songr.models.Album;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 class SongrApplicationTests {
 	@Test
 	public void testAlbumConstructorAndGetters() {
@@ -35,6 +44,16 @@ class SongrApplicationTests {
 		assertEquals(2, album.getSongCount());
 		assertEquals(200, album.getLength());
 		assertEquals("new.png", album.getImageUrl());
+	}
+
+	@Autowired
+	MockMvc mockMvc;
+	@Test
+	public void TestHelloRoute() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/hello"))
+				.andDo(print())
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.content().string(containsString("<h1>hello</h1>")));
 	}
 
 }
