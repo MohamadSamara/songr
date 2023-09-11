@@ -6,6 +6,9 @@
 </head>
 <body>
 <h1>Albums List</h1>
+<a href="/get-all-songs">
+    <button>All Songs</button>
+</a>
 
 <ul>
     <li th:each="album : ${albums}">
@@ -15,12 +18,43 @@
         <p th:text="${album.length + ' Sec '}"></p>
         <img th:src="${album.imageUrl}" th:alt="${album.title}"/>
 
-<!--        <form th:action="@{'/delete/' + ${album.id}}" method="post">-->
-<!--            <button type="submit">Delete</button>-->
-<!--        </form>-->
+        <h1>Add New Song</h1>
+
+        <form action="/add-song" method="post">
+            <fieldset>
+                <legend>Song Details</legend>
+
+                <input type="hidden" name="albumId" th:value="${album.id}">
+
+
+                <label for="titleSong">Song Title</label>
+                <input type="text" name="titleSong" id="titleSong" required>
+
+                <br>
+
+                <label for="length">Length (seconds)</label>
+                <input type="number" name="length" id="length" required>
+
+                <br>
+
+                <label for="trackNumber">Track Number</label>
+                <input type="number" name="trackNumber" id="trackNumber" required>
+
+                <br>
+
+                <input type="submit" value="Add Song">
+            </fieldset>
+        </form>
+
+        <a th:href="@{'/albumSongDetails/' + ${album.id}}">
+            <button>View Details</button>
+        </a>
+
+        <!--        <form th:action="@{'/delete/' + ${album.id}}" method="post">-->
+    <!--            <button type="submit">Delete</button>-->
+    <!--        </form>-->
     </li>
 </ul>
-
 
 
 <form action="/add-new-album" method="post">
